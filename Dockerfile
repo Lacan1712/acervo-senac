@@ -40,7 +40,11 @@ COPY Docker/script.sh /usr/local/bin/
 RUN a2enmod rewrite
 
 # Ajustar permissões
-RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
+# Configurar permissões
+RUN chown -R www-data:www-data /var/www/html \
+    && find /var/www/html -type d -exec chmod 755 {} \; \
+    && find /var/www/html -type f -exec chmod 644 {} \; \
+    && chmod +x /usr/local/bin/*.sh
 
 # Expor portas
 EXPOSE 80
