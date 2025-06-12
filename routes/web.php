@@ -7,8 +7,12 @@ use Illuminate\Support\Facades\Response;
 
 
 Route::get('/', [Principal::class, 'index'])->name('index');
+Route::get('/acervo', function () {
+    $dirs = Storage::disk('samba')->directories('acervo');
+    return view('acervo.index', compact('dirs'));
+})->name('acervo.show');
 
-Route::get('/acervo/file/{path}', function ($path) {
+Route::get('/acervo/categoria/{path}', function ($path) {
     $filePath = urldecode($path);
     if (!Storage::disk('samba')->exists($filePath)) {
         abort(404);

@@ -10,20 +10,11 @@ class Principal extends Controller
     //
 
     public function index(){
-        $contents = Storage::disk('samba')->listContents('/', true);
+        $dirs = Storage::disk('samba')->directories('acervo');
 
-        
-        $files = [];
-        $dirs = [];
+
     
-        foreach ($contents as $item) {
-            if ($item['type'] === 'file') {
-                $files[] = $item;
-            } else {
-                $dirs[] = $item;
-            }
-        }
     
-        return view('acervo.index', compact('dirs', 'files'));
+        return view('acervo.index', compact('dirs'));
     }
 }
