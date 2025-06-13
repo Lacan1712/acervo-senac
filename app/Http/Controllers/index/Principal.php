@@ -14,6 +14,6 @@ class Principal extends Controller
 
 
     
-        return view('acervo.index', compact('dirs'));
+        return view('layout.app', compact('dirs'));
     }
 }
