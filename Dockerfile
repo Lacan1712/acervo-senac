@@ -1,10 +1,8 @@
 # Etapa 1: Build do Tailwind (Node.js)
 FROM node:20 AS frontend
 WORKDIR /app
-COPY package*.json ./
+COPY . ./
 RUN npm install
-COPY resources/ resources/
-COPY tailwind.config.js vite.config.js ./
 RUN npm run build
 
 # Etapa 2: Build do Laravel (Composer)
@@ -34,7 +32,6 @@ COPY --from=frontend /app/public /var/www/html/public
 COPY --from=backend /app /var/www/html
 
 COPY Docker/script.sh /usr/local/bin/
-
 
 # Habilitar Apache mod_rewrite
 RUN a2enmod rewrite
