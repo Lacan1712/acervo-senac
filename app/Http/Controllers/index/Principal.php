@@ -10,10 +10,9 @@ class Principal extends Controller
     //
 
     public function index(){
-        $dirs = Storage::disk('samba')->directories('acervo');
+        $dirs = Storage::disk('samba')->allDirectories('acervo');
 
 
-    
     
         return view('acervo.index', compact('dirs'));
     }
